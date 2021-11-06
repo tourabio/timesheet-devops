@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import tn.esprit.spring.EmployeeTest;
 import tn.esprit.spring.entities.Contrat;
 import tn.esprit.spring.entities.Departement;
 import tn.esprit.spring.entities.Employe;
@@ -21,7 +24,7 @@ import tn.esprit.spring.repository.TimesheetRepository;
 
 @Service
 public class EmployeServiceImpl implements IEmployeService {
-
+	private static final Logger l = LogManager.getLogger(EmployeServiceImpl.class);
 	@Autowired
 	EmployeRepository employeRepository;
 	@Autowired
@@ -32,6 +35,7 @@ public class EmployeServiceImpl implements IEmployeService {
 	TimesheetRepository timesheetRepository;
 
 	public Employe authenticate(String login, String password) {
+		l.info("authenticate user with login : "+login+ "password : "+ password);
 		return employeRepository.getEmployeByEmailAndPassword(login, password);
 	}
 
@@ -43,6 +47,7 @@ public class EmployeServiceImpl implements IEmployeService {
 
 	public void mettreAjourEmailByEmployeId(String email, int employeId) {
 		Employe employe = employeRepository.findById(employeId).get();
+		l.info("mettreAjourEmailByEmployeId with email :  " + email + "and employee : " + employeId);
 		employe.setEmail(email);
 		employeRepository.save(employe);
 
