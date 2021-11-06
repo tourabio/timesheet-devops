@@ -20,16 +20,17 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import tn.esprit.spring.entities.Employe;
 import tn.esprit.spring.entities.Role;
-import tn.esprit.spring.repository.EmployeRepository;
 import tn.esprit.spring.services.IEmployeService;
+
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class EmployeeTest {
+public class EmployeServiceImplTest {
 	@Autowired
 	IEmployeService es;
 	
 	private static final Logger l =
-	LogManager.getLogger(EmployeeTest.class);
+	LogManager.getLogger(EmployeServiceImplTest.class);
 
 	@Test
 	public void testAddEmploye() throws ParseException {
